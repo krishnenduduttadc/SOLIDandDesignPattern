@@ -6,10 +6,10 @@ interface Command {
 }
 
 //Concrete Classes for Commands
-class BoldCommand implements Command{
+class BoldCommand implements Command {
     private TextEditorII editor;
 
-    public BoldCommand(TextEditorII editor){
+    public BoldCommand(TextEditorII editor) {
         this.editor = editor;
     }
 
@@ -19,10 +19,10 @@ class BoldCommand implements Command{
     }
 }
 
-class ChangeColor implements Command{
+class ChangeColor implements Command {
     private TextEditorII editor;
 
-    public ChangeColor(TextEditorII editor){
+    public ChangeColor(TextEditorII editor) {
         this.editor = editor;
     }
 
@@ -32,15 +32,42 @@ class ChangeColor implements Command{
     }
 }
 
+class ItalicCommand implements Command {
+    private TextEditorII editor;
+
+    public ItalicCommand(TextEditorII editor) {
+        this.editor = editor;
+    }
+
+    @Override
+    public void execute() {
+        editor.italicizeText();
+    }
+}
+
+class UnderlineCommand implements Command{
+    private TextEditorII editor;
+
+    public UnderlineCommand(TextEditorII editor) {
+        this.editor = editor;
+    }
+
+    @Override
+    public void execute() {
+        editor.underlineText();
+    }
+}
+
 
 //Button Class
-class Button{
+class Button {
     private Command command;
 
-    public void setCommand(Command command){
+    public void setCommand(Command command) {
         this.command = command;
     }
-    public void click(){
+
+    public void click() {
         command.execute();
     }
 }
@@ -60,7 +87,7 @@ class TextEditorII {
         System.out.println("Text has been underlined.");
     }
 
-    public void changeColor(){
+    public void changeColor() {
         System.out.println("Text color has been changed");
     }
 }
@@ -74,6 +101,8 @@ public class WithCommandPattern {
         Button button = new Button();
         button.setCommand(new BoldCommand(editorII));
         button.setCommand(new ChangeColor(editorII));
+        button.setCommand(new ItalicCommand(editorII));
+        button.setCommand(new UnderlineCommand(editorII));
         button.click();
 
     }

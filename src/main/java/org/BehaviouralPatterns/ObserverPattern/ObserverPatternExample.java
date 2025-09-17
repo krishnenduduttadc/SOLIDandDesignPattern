@@ -4,28 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Observer Interface
-interface Observer{
+interface Observer {
     void update(float temp);
 }
 
 //Subject Interface
-interface Subject{
+interface Subject {
     void attach(Observer obs);
+
     void detach(Observer obs);
+
     void notifyObservers();
 }
 
 
 // Weather Station
-class WeatherStationIn implements Subject{
+class WeatherStationIn implements Subject {
     private float temperature;
     private List<Observer> observerList;
 
-    public WeatherStationIn(){
+    public WeatherStationIn() {
         observerList = new ArrayList<>(); //Empty
     }
 
-    public void setTemperature(float temperature){
+    public void setTemperature(float temperature) {
         this.temperature = temperature;
         notifyObservers();
     }
@@ -42,27 +44,43 @@ class WeatherStationIn implements Subject{
 
     @Override
     public void notifyObservers() {
-        for(Observer obs:observerList){
+        for (Observer obs : observerList) {
             obs.update(temperature); //Run Time Polymorphism
         }
     }
 }
 
 
-class DisplayDeviceIn implements Observer{
+class DisplayDeviceIn implements Observer {
     String name;
-    public DisplayDeviceIn(String deviceName){
+
+    public DisplayDeviceIn(String deviceName) {
         this.name = deviceName;
     }
+
     @Override
     public void update(float temp) {
-        System.out.println("Temp on " + name +" device is "+temp);
+        System.out.println("Temp on " + name + " device is " + temp);
     }
 }
-class MobileDevice implements Observer{
+
+class MobileDevice implements Observer {
     @Override
     public void update(float temp) {
-        System.out.println("Temp on mobile is "+temp);
+        System.out.println("Temp on mobile is " + temp);
+    }
+}
+
+class SmartWatch implements Observer {
+    String name;
+
+    public SmartWatch(String deviceName) {
+        this.name = deviceName;
+    }
+
+    @Override
+    public void update(float temp) {
+        System.out.println("Temp on smartwatch i.e. " + name + " is " + temp);
     }
 }
 
@@ -75,10 +93,12 @@ public class ObserverPatternExample {
         //Create subscribers
         DisplayDeviceIn device = new DisplayDeviceIn("SamsungLCD");
         MobileDevice mobileDevice = new MobileDevice();
+        SmartWatch smartWatch = new SmartWatch("Fitbit");
 
         //Attach
         weatherStationIn.attach(device);
         weatherStationIn.attach(mobileDevice);
+        weatherStationIn.attach(smartWatch);
 
         //Set Temp
         weatherStationIn.setTemperature(25);

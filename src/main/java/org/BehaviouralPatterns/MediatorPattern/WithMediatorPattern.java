@@ -63,10 +63,12 @@ public class WithMediatorPattern {
         ChatUser rahul = new ChatUser("Rahul",chatRoom);
         ChatUser amit = new ChatUser("Amit",chatRoom);
         ChatUser neha = new ChatUser("Neha",chatRoom);
+        ChatUser krish=new ChatUser("Krish",chatRoom);
 
         chatRoom.addUser(rahul);
         chatRoom.addUser(neha);
         chatRoom.addUser(amit);
+        chatRoom.addUser(krish);
 
         amit.sendMessage("Hi everyone");
     }

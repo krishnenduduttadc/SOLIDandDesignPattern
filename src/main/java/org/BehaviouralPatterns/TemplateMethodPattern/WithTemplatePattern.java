@@ -1,4 +1,4 @@
-package org.prateek.BehaviouralPatterns.TemplateMethodPattern;
+package org.BehaviouralPatterns.TemplateMethodPattern;
 
 
 import javax.xml.crypto.Data;
@@ -34,12 +34,21 @@ class JSONParserII extends DataParser{
         System.out.println("Parsing JSON Data");
     }
 }
+class XMLParser extends DataParser{
+
+    @Override
+    protected void parseData() {
+        System.out.println("Parsing XML Data");
+    }
+}
 
 public class WithTemplatePattern {
     public static void main(String[] args) {
         DataParser csvParser = new CSVParserII();
         DataParser jsonParser = new JSONParserII();
+        DataParser xmlParser=new XMLParser();
         csvParser.parse();
         jsonParser.parse();
+        xmlParser.parse();
     }
 }

@@ -28,6 +28,14 @@ class UPIPayment implements PaymentStrategy{
     }
 }
 
+class Crypto implements PaymentStrategy{
+
+    @Override
+    public void processPayment() {
+        System.out.println("Making payment via Crypto");
+    }
+}
+
 
 class PaymentServiceII{
     private PaymentStrategy strategy;
@@ -47,5 +55,10 @@ public class StrategyPattern {
         PaymentServiceII paymentService = new PaymentServiceII();
         paymentService.setPaymentStrategy(new UPIPayment());
         paymentService.pay();
+
+
+        PaymentServiceII paymentService2=new PaymentServiceII();
+        paymentService2.setPaymentStrategy(new Crypto());
+        paymentService2.pay();
     }
 }
